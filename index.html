@@ -1,0 +1,116 @@
+<!DOCTYPE html><html class="default" lang="en" data-base="./"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>@study-lenses/trace-py-pyodide</title><meta name="description" content="Documentation for @study-lenses/trace-py-pyodide"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script defer src="assets/main.js"></script><script async src="assets/icons.js" id="tsd-icons-script"></script><script async src="assets/search.js" id="tsd-search-script"></script><script async src="assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><a href="index.html" class="title">@study-lenses/trace-py-pyodide</a><div id="tsd-toolbar-links"></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/><ul role="listbox" id="tsd-search-results"></ul><div id="tsd-search-status" aria-live="polite" aria-atomic="true"><div>Preparing search index...</div></div></dialog><a href="#" class="tsd-widget menu" id="tsd-toolbar-menu-trigger" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-menu"></use></svg></a></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><h1>@study-lenses/trace-py-pyodide</h1></div><div class="tsd-panel tsd-typography"><h1 id="study-lensestrace-py-pyodide" class="tsd-anchor-link">@study-lenses/trace-py-pyodide<a href="#study-lensestrace-py-pyodide" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h1>
+<p><a href="https://www.npmjs.com/package/@study-lenses/trace-py-pyodide"><img src="https://img.shields.io/npm/v/@study-lenses/trace-py-pyodide.svg" alt="npm version"></a>
+<a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a></p>
+<blockquote>
+<p>Python execution tracer for <code>@study-lenses/tracing</code> — traces Python code via Pyodide + sys.settrace()</p>
+</blockquote>
+<h2 id="pedagogical-purpose" class="tsd-anchor-link">Pedagogical Purpose<a href="#pedagogical-purpose" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p><strong>Neutral infrastructure:</strong> This package provides raw Python execution traces for
+educational tool developers. It makes no pedagogical decisions — those belong in the
+tools that consume it.</p>
+<p>The trace data captures function calls and returns with arguments, return values, and
+call depth. Educational tools decide which subset to show and how to present it.</p>
+<h2 id="who-is-this-for" class="tsd-anchor-link">Who Is This For<a href="#who-is-this-for" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p><strong>Primary — Educational tool developers:</strong> Building Study Lenses, custom analysis tools,
+or other learning environments that need Python execution traces.</p>
+<p><strong>Secondary — CS instructors:</strong> Using this package directly to build course-specific
+debugging aids or step-through visualizations.</p>
+<h2 id="install" class="tsd-anchor-link">Install<a href="#install" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<pre><code class="bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span><span class="hl-1"> </span><span class="hl-2">@study-lenses/trace-py-pyodide</span>
+</code><button type="button">Copy</button></pre>
+
+<h2 id="quick-start" class="tsd-anchor-link">Quick Start<a href="#quick-start" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<pre><code class="typescript"><span class="hl-3">import</span><span class="hl-1"> trace </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@study-lenses/trace-py-pyodide&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-4">code</span><span class="hl-1"> </span><span class="hl-3">=</span><span class="hl-1"> </span><span class="hl-2">`</span><br/><span class="hl-2">def fibonacci(n):</span><br/><span class="hl-2">    if n &lt;= 1:</span><br/><span class="hl-2">        return n</span><br/><span class="hl-2">    return fibonacci(n - 1) + fibonacci(n - 2)</span><br/><br/><span class="hl-2">print(fibonacci(5))</span><br/><span class="hl-2">`</span><span class="hl-1">;</span><br/><br/><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-4">steps</span><span class="hl-1"> </span><span class="hl-3">=</span><span class="hl-1"> </span><span class="hl-3">await</span><span class="hl-1"> </span><span class="hl-0">trace</span><span class="hl-1">(code);</span><br/><span class="hl-1">console.</span><span class="hl-0">log</span><span class="hl-1">(steps);</span><br/><span class="hl-5">// → [{ step: 1, category: &#39;call&#39;, type: &#39;FunctionCall&#39;, detail: { name: &#39;fibonacci&#39;, args: [&#39;5&#39;], depth: 0 }, ... }, ...]</span>
+</code><button type="button">Copy</button></pre>
+
+<h2 id="api-summary" class="tsd-anchor-link">API Summary<a href="#api-summary" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p><code>@study-lenses/trace-py-pyodide</code> pre-configures all four <code>@study-lenses/tracing</code> wrappers
+with the py-pyodide tracer:</p>
+<table>
+<thead>
+<tr>
+<th>Export</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>trace(code, config?)</code></td>
+<td>Positional args, throws on error. Default export.</td>
+</tr>
+<tr>
+<td><code>tracify</code></td>
+<td>Chainable builder with tracer pre-set, throws on error.</td>
+</tr>
+<tr>
+<td><code>embody({ code, config? })</code></td>
+<td>Keyed args, returns Result (no throw).</td>
+</tr>
+<tr>
+<td><code>embodify({ code?, config? })</code></td>
+<td>Immutable chainable builder, returns Result.</td>
+</tr>
+</tbody>
+</table>
+<p>See <a href="media/DOCS.md">DOCS.md</a> for the full API reference.</p>
+<h2 id="design-principles" class="tsd-anchor-link">Design Principles<a href="#design-principles" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<h3 id="what-this-package-provides" class="tsd-anchor-link">What this package provides<a href="#what-this-package-provides" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul>
+<li>Function-level execution traces for Python code (calls and returns)</li>
+<li>Pyodide-based execution (Python in the browser via WebAssembly)</li>
+<li>sys.settrace() instrumentation (automatic, no code modification needed)</li>
+<li>Captures: function name, arguments, return values, call depth, line numbers</li>
+<li>The four standard <code>@study-lenses/tracing</code> wrappers, pre-bound to this tracer</li>
+</ul>
+<h3 id="what-this-package-does-not-do" class="tsd-anchor-link">What this package does NOT do<a href="#what-this-package-does-not-do" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul>
+<li>Make pedagogical decisions (what to show, how to explain)</li>
+<li>Persist or accumulate traces across calls</li>
+<li>Support languages other than Python</li>
+<li>Trace line-by-line execution (only function calls/returns)</li>
+</ul>
+<h2 id="architecture" class="tsd-anchor-link">Architecture<a href="#architecture" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<pre><code><span class="hl-1">code → Pyodide execution → sys.</span><span class="hl-0">settrace</span><span class="hl-1">() → </span><span class="hl-3">function</span><span class="hl-1"> </span><span class="hl-0">events</span><span class="hl-1"> → </span><span class="hl-0">Step</span><span class="hl-1">[]</span>
+</code><button>Copy</button></pre>
+
+<p>The tracer uses Pyodide (CPython compiled to WebAssembly) to execute Python code
+in the browser. Python's built-in <code>sys.settrace()</code> captures function call and return
+events, which are converted to the <code>@study-lenses/tracing</code> Step[] format.</p>
+<h3 id="step-format" class="tsd-anchor-link">Step Format<a href="#step-format" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>Each step includes:</p>
+<pre><code class="typescript"><span class="hl-1">{</span><br/><span class="hl-1">  </span><span class="hl-0">step</span><span class="hl-1">: number;           </span><span class="hl-5">// 1-indexed</span><br/><span class="hl-1">  </span><span class="hl-0">category</span><span class="hl-1">: </span><span class="hl-2">&#39;call&#39;</span><span class="hl-1"> </span><span class="hl-3">|</span><span class="hl-1"> </span><span class="hl-2">&#39;return&#39;</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-0">type</span><span class="hl-1">: </span><span class="hl-2">&#39;FunctionCall&#39;</span><span class="hl-1">;</span><br/><span class="hl-1">  </span><span class="hl-0">loc</span><span class="hl-1">: {</span><br/><span class="hl-1">    </span><span class="hl-0">start</span><span class="hl-1">: { </span><span class="hl-0">line</span><span class="hl-1">: number; </span><span class="hl-0">column</span><span class="hl-1">: number };</span><br/><span class="hl-1">    </span><span class="hl-0">end</span><span class="hl-1">: { </span><span class="hl-0">line</span><span class="hl-1">: number; </span><span class="hl-0">column</span><span class="hl-1">: number };</span><br/><span class="hl-1">  };</span><br/><span class="hl-1">  </span><span class="hl-0">detail</span><span class="hl-1">: {</span><br/><span class="hl-1">    </span><span class="hl-0">name</span><span class="hl-1">: string;         </span><span class="hl-5">// Function name</span><br/><span class="hl-1">    </span><span class="hl-0">depth</span><span class="hl-1">: number;        </span><span class="hl-5">// Call stack depth</span><br/><span class="hl-1">    args</span><span class="hl-3">?:</span><span class="hl-1"> string[];      </span><span class="hl-5">// Arguments (for &#39;call&#39; steps)</span><br/><span class="hl-1">    returnValue</span><span class="hl-3">?:</span><span class="hl-1"> string; </span><span class="hl-5">// Return value (for &#39;return&#39; steps)</span><br/><span class="hl-1">  };</span><br/><span class="hl-1">}</span>
+</code><button type="button">Copy</button></pre>
+
+<h2 id="browser-only" class="tsd-anchor-link">Browser-Only<a href="#browser-only" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p><strong>Important:</strong> This package works in both browser and Node.js environments:</p>
+<ul>
+<li><strong>Browser:</strong> Uses Pyodide (Python compiled to WebAssembly)</li>
+<li><strong>Node.js:</strong> Uses Python subprocess (requires Python 3 installed)</li>
+</ul>
+<p>The tracer automatically detects the environment and uses the appropriate method.</p>
+<p><strong>For Node.js testing:</strong> Ensure Python 3 is installed and available as <code>python3</code> in your PATH.</p>
+<h2 id="examples" class="tsd-anchor-link">Examples<a href="#examples" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<h3 id="basic-function-call" class="tsd-anchor-link">Basic Function Call<a href="#basic-function-call" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<pre><code class="typescript"><span class="hl-3">import</span><span class="hl-1"> trace </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@study-lenses/trace-py-pyodide&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-4">steps</span><span class="hl-1"> </span><span class="hl-3">=</span><span class="hl-1"> </span><span class="hl-3">await</span><span class="hl-1"> </span><span class="hl-0">trace</span><span class="hl-1">(</span><span class="hl-2">`</span><br/><span class="hl-2">def greet(name):</span><br/><span class="hl-2">    return f&quot;Hello, {name}!&quot;</span><br/><br/><span class="hl-2">greet(&quot;World&quot;)</span><br/><span class="hl-2">`</span><span class="hl-1">);</span><br/><br/><span class="hl-5">// Returns 2 steps: call + return</span>
+</code><button type="button">Copy</button></pre>
+
+<h3 id="recursive-function" class="tsd-anchor-link">Recursive Function<a href="#recursive-function" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<pre><code class="typescript"><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-4">steps</span><span class="hl-1"> </span><span class="hl-3">=</span><span class="hl-1"> </span><span class="hl-3">await</span><span class="hl-1"> </span><span class="hl-0">trace</span><span class="hl-1">(</span><span class="hl-2">`</span><br/><span class="hl-2">def factorial(n):</span><br/><span class="hl-2">    if n &lt;= 1:</span><br/><span class="hl-2">        return 1</span><br/><span class="hl-2">    return n * factorial(n - 1)</span><br/><br/><span class="hl-2">factorial(5)</span><br/><span class="hl-2">`</span><span class="hl-1">);</span><br/><br/><span class="hl-5">// Returns 10 steps: 5 calls + 5 returns</span>
+</code><button type="button">Copy</button></pre>
+
+<h3 id="with-config-options" class="tsd-anchor-link">With Config Options<a href="#with-config-options" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<pre><code class="typescript"><span class="hl-3">import</span><span class="hl-1"> { tracify } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@study-lenses/trace-py-pyodide&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-4">steps</span><span class="hl-1"> </span><span class="hl-3">=</span><span class="hl-1"> </span><span class="hl-3">await</span><span class="hl-1"> tracify</span><br/><span class="hl-1">  .</span><span class="hl-0">code</span><span class="hl-1">(</span><br/><span class="hl-1">    </span><span class="hl-2">`</span><br/><span class="hl-2">def fibonacci(n):</span><br/><span class="hl-2">    if n &lt;= 1:</span><br/><span class="hl-2">        return n</span><br/><span class="hl-2">    return fibonacci(n - 1) + fibonacci(n - 2)</span><br/><br/><span class="hl-2">fibonacci(10)</span><br/><span class="hl-2">`</span><span class="hl-1">,</span><br/><span class="hl-1">  )</span><br/><span class="hl-1">  .</span><span class="hl-0">meta</span><span class="hl-1">({ max: { steps: </span><span class="hl-4">50</span><span class="hl-1"> } }) </span><span class="hl-5">// Limit to 50 steps</span><br/><span class="hl-1">  .</span><span class="hl-0">record</span><span class="hl-1">();</span>
+</code><button type="button">Copy</button></pre>
+
+<h2 id="limitations" class="tsd-anchor-link">Limitations<a href="#limitations" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<ul>
+<li><strong>Function-level only:</strong> Traces function calls/returns, not line-by-line execution</li>
+<li><strong>Performance (browser):</strong> Pyodide initialization takes 3-10 seconds on first load</li>
+<li><strong>Size (browser):</strong> Pyodide is ~10MB (cached after first load)</li>
+<li><strong>Node.js requirement:</strong> Requires Python 3 installed for Node.js/testing mode</li>
+</ul>
+<h2 id="contributing" class="tsd-anchor-link">Contributing<a href="#contributing" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>See <a href="media/CONTRIBUTING.md">CONTRIBUTING.md</a> and <a href="media/DEV.md">DEV.md</a>.</p>
+<h2 id="license" class="tsd-anchor-link">License<a href="#license" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>MIT © 2025 Fahed Daibes &amp; Evan Cole</p>
+</div></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-accordion"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg><h3>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></div><div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg><h3>On This Page</h3></summary><div class="tsd-accordion-details"><a href="#study-lensestrace-py-pyodide"><span>@study-<wbr/>lenses/trace-<wbr/>py-<wbr/>pyodide</span></a><ul><li><a href="#pedagogical-purpose"><span>Pedagogical <wbr/>Purpose</span></a></li><li><a href="#who-is-this-for"><span>Who <wbr/>Is <wbr/>This <wbr/>For</span></a></li><li><a href="#install"><span>Install</span></a></li><li><a href="#quick-start"><span>Quick <wbr/>Start</span></a></li><li><a href="#api-summary"><span>API <wbr/>Summary</span></a></li><li><a href="#design-principles"><span>Design <wbr/>Principles</span></a></li><li><ul><li><a href="#what-this-package-provides"><span>What this package provides</span></a></li><li><a href="#what-this-package-does-not-do"><span>What this package does <wbr/>NOT do</span></a></li></ul></li><li><a href="#architecture"><span>Architecture</span></a></li><li><ul><li><a href="#step-format"><span>Step <wbr/>Format</span></a></li></ul></li><li><a href="#browser-only"><span>Browser-<wbr/>Only</span></a></li><li><a href="#examples"><span>Examples</span></a></li><li><ul><li><a href="#basic-function-call"><span>Basic <wbr/>Function <wbr/>Call</span></a></li><li><a href="#recursive-function"><span>Recursive <wbr/>Function</span></a></li><li><a href="#with-config-options"><span>With <wbr/>Config <wbr/>Options</span></a></li></ul></li><li><a href="#limitations"><span>Limitations</span></a></li><li><a href="#contributing"><span>Contributing</span></a></li><li><a href="#license"><span>License</span></a></li></ul></div></details></div><div class="site-menu"><nav class="tsd-navigation"><a href="modules.html">@study-lenses/trace-py-pyodide</a><ul class="tsd-small-nested-navigation" id="tsd-nav-container"><li>Loading...</li></ul></nav></div></div></div><footer></footer><div class="overlay"></div></body></html>
