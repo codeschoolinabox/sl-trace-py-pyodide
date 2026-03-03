@@ -80,12 +80,19 @@ See [DOCS.md](./DOCS.md) for the full API reference.
 
 ## Architecture
 
+**Dual-mode execution:**
+
 ```
-code → Pyodide execution → sys.settrace() → function events → Step[]
+Browser:  code → Pyodide (WebAssembly) → sys.settrace() → Step[]
+Node.js:  code → Python subprocess → sys.settrace() → JSON → Step[]
 ```
 
-The tracer uses Pyodide (CPython compiled to WebAssembly) to execute Python code
-in the browser. Python's built-in `sys.settrace()` captures function call and return
+The tracer automatically detects the environment:
+
+- **Browser:** Uses Pyodide (CPython compiled to WebAssembly) for in-browser execution
+- **Node.js:** Spawns a Python subprocess for testing/CI environments
+
+Both modes use Python's built-in `sys.settrace()` to capture function call and return
 events, which are converted to the `@study-lenses/tracing` Step[] format.
 
 ### Step Format
