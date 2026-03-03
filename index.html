@@ -70,11 +70,16 @@ with the py-pyodide tracer:</p>
 <li>Trace line-by-line execution (only function calls/returns)</li>
 </ul>
 <h2 id="architecture" class="tsd-anchor-link">Architecture<a href="#architecture" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
-<pre><code><span class="hl-1">code → Pyodide execution → sys.</span><span class="hl-0">settrace</span><span class="hl-1">() → </span><span class="hl-3">function</span><span class="hl-1"> </span><span class="hl-0">events</span><span class="hl-1"> → </span><span class="hl-0">Step</span><span class="hl-1">[]</span>
+<p><strong>Dual-mode execution:</strong></p>
+<pre><code><span class="hl-0">Browser</span><span class="hl-1">:  code → </span><span class="hl-0">Pyodide</span><span class="hl-1"> (WebAssembly) → sys.</span><span class="hl-0">settrace</span><span class="hl-1">() → Step[]</span><br/><span class="hl-1">Node.js:  code → Python subprocess → sys.</span><span class="hl-0">settrace</span><span class="hl-1">() → </span><span class="hl-4">JSON</span><span class="hl-1"> → Step[]</span>
 </code><button>Copy</button></pre>
 
-<p>The tracer uses Pyodide (CPython compiled to WebAssembly) to execute Python code
-in the browser. Python's built-in <code>sys.settrace()</code> captures function call and return
+<p>The tracer automatically detects the environment:</p>
+<ul>
+<li><strong>Browser:</strong> Uses Pyodide (CPython compiled to WebAssembly) for in-browser execution</li>
+<li><strong>Node.js:</strong> Spawns a Python subprocess for testing/CI environments</li>
+</ul>
+<p>Both modes use Python's built-in <code>sys.settrace()</code> to capture function call and return
 events, which are converted to the <code>@study-lenses/tracing</code> Step[] format.</p>
 <h3 id="step-format" class="tsd-anchor-link">Step Format<a href="#step-format" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <p>Each step includes:</p>
