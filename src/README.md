@@ -18,13 +18,13 @@ src/
 
 ## What To Edit
 
-| File | When to touch it |
-| --- | --- |
-| `record/index.ts` | Changing the tracing pipeline or filter behaviour |
-| `verify-options/index.ts` | Adding new cross-field constraints to options |
-| `options.schema.json` | Changing the options structure |
-| `id.ts` | Bumping the tracer cache key (rare — only when options shape changes incompatibly) |
-| `langs.ts` | Adding/removing supported file extensions |
+| File                      | When to touch it                                                                   |
+| ------------------------- | ---------------------------------------------------------------------------------- |
+| `record/index.ts`         | Changing the tracing pipeline or filter behaviour                                  |
+| `verify-options/index.ts` | Adding new cross-field constraints to options                                      |
+| `options.schema.json`     | Changing the options structure                                                     |
+| `id.ts`                   | Bumping the tracer cache key (rare — only when options shape changes incompatibly) |
+| `langs.ts`                | Adding/removing supported file extensions                                          |
 
 ## What NOT To Touch
 

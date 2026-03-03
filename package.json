@@ -1,7 +1,7 @@
 {
-  "name": "@study-lenses/trace-js-klve",
-  "version": "0.1.1",
-  "description": "JavaScript execution tracer for @study-lenses — traces JS code via Babel instrumentation",
+  "name": "@study-lenses/trace-py-pyodide",
+  "version": "0.1.0",
+  "description": "Python execution tracer for @study-lenses — traces Python code via Pyodide + sys.settrace()",
   "type": "module",
   "exports": {
     ".": {
@@ -12,7 +12,8 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && npm run copy-python",
+    "copy-python": "cp src/record/tracer.py dist/record/tracer.py",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
@@ -47,8 +48,8 @@
   },
   "author": "Evan Cole",
   "dependencies": {
-    "@babel/standalone": "^7.26.0",
-    "@study-lenses/tracing": "^0.1.0"
+    "@study-lenses/tracing": "^0.1.0",
+    "pyodide": "^0.24.1"
   },
   "license": "MIT",
   "publishConfig": {

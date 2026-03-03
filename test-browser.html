@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Python Tracer</title>
+    <style>
+        body {
+            font-family: monospace;
+            padding: 20px;
+            background: #1e1e1e;
+            color: #d4d4d4;
+        }
+        pre {
+            background: #252526;
+            padding: 20px;
+            border-radius: 8px;
+            overflow: auto;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .loading { background: #fff3cd; color: #856404; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <h1>Testing @study-lenses/trace-py-pyodide</h1>
+    <div id="status" class="status loading">Loading tracer...</div>
+    <pre id="output">Waiting...</pre>
+
+    <script type="module">
+        const statusEl = document.getElementById('status');
+        const outputEl = document.getElementById('output');
+
+        try {
+            statusEl.textContent = 'Importing tracer...';
+            
+            // Import the tracer
+            const { default: trace } = await import('./dist/index.js');
+            
+            statusEl.textContent = 'Running Python code...';
+            
+            const code = `
+def fibonacci(n):
+    if n <= 1:
+        return n
+    return fibonacci(n - 1) + fibonacci(n - 2)
+
+print('Result:', fibonacci(3))
+`;
+
+            const steps = await trace(code);
+            
+            statusEl.className = 'status success';
+            statusEl.textContent = `✓ Success! Got ${steps.length} steps`;
+            
+            outputEl.textContent = JSON.stringify(steps, null, 2);
+            
+        } catch (error) {
+            statusEl.className = 'status error';
+            statusEl.textContent = '✗ Error: ' + error.message;
+            outputEl.textContent = error.stack;
+            console.error(error);
+        }
+    </script>
+</body>
+</html>

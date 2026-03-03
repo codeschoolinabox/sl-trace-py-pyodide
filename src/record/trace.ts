@@ -411,7 +411,8 @@ function transpilerPlugin(
       const result: Record<string, unknown> = {
         action,
         computed,
-        property: !computed && property['type'] === 'Identifier' ? (property['name'] as string) : null,
+        property:
+          !computed && property['type'] === 'Identifier' ? (property['name'] as string) : null,
       };
       if (n['optional'] === true) {
         result['optional'] = true;
@@ -867,11 +868,7 @@ function transpilerPlugin(
               t.assignmentExpression(
                 '=',
                 clonedArgument as Babel.types.LVal,
-                t.binaryExpression(
-                  operator[0] as '+' | '-',
-                  argument,
-                  t.numericLiteral(1),
-                ),
+                t.binaryExpression(operator[0] as '+' | '-', argument, t.numericLiteral(1)),
               ),
               REPORT(clonedArgument, path.node, path.scope, 'after'),
             ]),

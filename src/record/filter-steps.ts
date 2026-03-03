@@ -6,12 +6,7 @@
  */
 
 import { AST_TO_CONFIG } from './ast-map.js';
-import type {
-  RawStep,
-  JsKlveOptions,
-  JsKlveNameConfig,
-  JsKlveStep,
-} from './types.js';
+import type { RawStep, JsKlveOptions, JsKlveNameConfig, JsKlveStep } from './types.js';
 
 /**
  * Fully resolved node config (all fields required, no undefined).
@@ -312,10 +307,7 @@ function stripData(step: RawStep, dataConfig: ResolvedFilterConfig['data']): JsK
  * @param config - Filter configuration (partial, defaults applied)
  * @returns Filtered and stripped steps
  */
-function filterSteps(
-  steps: readonly RawStep[],
-  config: JsKlveOptions = {},
-): readonly JsKlveStep[] {
+function filterSteps(steps: readonly RawStep[], config: JsKlveOptions = {}): readonly JsKlveStep[] {
   const filled = fillConfig(config);
   const nodeLookup = buildNodeLookup(filled.nodes);
 

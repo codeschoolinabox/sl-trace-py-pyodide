@@ -1,8 +1,8 @@
 /**
- * @file Supported file extensions for the js-klve tracer.
+ * @file Supported file extensions for the py-pyodide tracer.
  *
- * The tracer accepts `.js`, `.mjs`, and `.cjs` files.
+ * The tracer accepts `.py` files.
  * Frozen in `index.ts` alongside other static data.
  */
 
-export default ['js', 'mjs', 'cjs'];
+export default ['py'];

@@ -12,14 +12,14 @@ implementation details out of `src/`. New engine files belong here, not in `src/
 
 ## What we own vs what we don't
 
-| File | Owned by |
-| --- | --- |
-| `index.ts` | This package — adapter + error mapping |
-| `trace.ts` | Kelley van Evert (external, do not edit) |
-| `filter-steps.ts` | Kelley van Evert (external, do not edit) |
-| `ast-map.ts` | Kelley van Evert (external, do not edit) |
-| `types.ts` | Kelley van Evert (external, do not edit) |
-| `babel-standalone.d.ts` | Type shim, do not edit |
+| File                    | Owned by                                 |
+| ----------------------- | ---------------------------------------- |
+| `index.ts`              | This package — adapter + error mapping   |
+| `trace.ts`              | Kelley van Evert (external, do not edit) |
+| `filter-steps.ts`       | Kelley van Evert (external, do not edit) |
+| `ast-map.ts`            | Kelley van Evert (external, do not edit) |
+| `types.ts`              | Kelley van Evert (external, do not edit) |
+| `babel-standalone.d.ts` | Type shim, do not edit                   |
 
 External files are excluded from ESLint and TypeScript strict checking.
 

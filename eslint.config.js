@@ -58,11 +58,25 @@ export default tseslint.config(
       // record and verify may each be a single file OR expanded to a folder — both patterns covered.
       'boundaries/ignore': ['**/tests/**/*.ts'],
       'boundaries/elements': [
-        { type: 'entry',  pattern: 'src/index.ts',                                                              mode: 'file' },
-        { type: 'record', pattern: ['src/record.ts', 'src/record/**'],                                          mode: 'file' },
-        { type: 'verify', pattern: ['src/verify-options.ts', 'src/verify-options/**'],                          mode: 'file' },
-        { type: 'core',   pattern: ['src/id.ts', 'src/langs.ts', 'src/types.ts', 'src/options-schema.ts', 'src/*.schema.json'], mode: 'file' },
-        { type: 'utils',  pattern: 'src/utils/**',                                                              mode: 'file' },
+        { type: 'entry', pattern: 'src/index.ts', mode: 'file' },
+        { type: 'record', pattern: ['src/record.ts', 'src/record/**'], mode: 'file' },
+        {
+          type: 'verify',
+          pattern: ['src/verify-options.ts', 'src/verify-options/**'],
+          mode: 'file',
+        },
+        {
+          type: 'core',
+          pattern: [
+            'src/id.ts',
+            'src/langs.ts',
+            'src/types.ts',
+            'src/options-schema.ts',
+            'src/*.schema.json',
+          ],
+          mode: 'file',
+        },
+        { type: 'utils', pattern: 'src/utils/**', mode: 'file' },
       ],
     },
     rules: {
@@ -71,11 +85,11 @@ export default tseslint.config(
         {
           default: 'disallow',
           rules: [
-            { from: 'entry',  allow: ['record', 'verify', 'core', 'utils'] },
+            { from: 'entry', allow: ['record', 'verify', 'core', 'utils'] },
             { from: 'record', allow: ['record', 'core', 'utils'] },
             { from: 'verify', allow: ['verify', 'core', 'utils'] },
-            { from: 'core',   allow: ['core', 'utils'] },
-            { from: 'utils',  allow: ['utils'] },
+            { from: 'core', allow: ['core', 'utils'] },
+            { from: 'utils', allow: ['utils'] },
           ],
         },
       ],
@@ -83,7 +97,10 @@ export default tseslint.config(
       'boundaries/no-unknown-files': ['error'],
 
       // --- TypeScript ---
-      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+      ],
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       // `any` types: Warn during development, review in PR
