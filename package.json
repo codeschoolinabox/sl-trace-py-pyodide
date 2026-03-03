@@ -48,7 +48,7 @@
   },
   "author": "Evan Cole",
   "dependencies": {
-    "@study-lenses/tracing": "^0.1.0",
+    "@study-lenses/tracing": "^0.1.2",
     "pyodide": "^0.24.1"
   },
   "license": "MIT",
